@@ -396,7 +396,8 @@ V.set=()=>`<div class="grid g2"><div class="card"><h3>Société</h3>
   <div class="row" style="margin-top:12px"><button class="btn" data-a="sc">Enregistrer</button><button class="btn g" data-a="rs">Réinitialiser les données démo</button></div></div>
   <div class="card"><h3>Journaux</h3>${tbl(['Code','Intitulé'],Object.entries(JOU).map(([k,v])=>[k,v]))}<h3 style="margin-top:16px">Modèle comptable</h3><p>Plan SYSCOHADA, TVA ${S.co.tva*100} %, exercice ${S.co.ex}. Les modules Essentiel, Standard, Comptabilité, Commerciale, Stocks, Trésorerie, Immobilisations, Paie et Flotte sont regroupés dans cette application — là où Sage les sépare en Sage 30, 50, 100 et X3.</p></div></div>`;
 
-function modal(t,b,f,wide){okFn=f;$('#m').innerHTML=`<div class="mb${wide?' wide':''}"><h3>${t}</h3><div class="mbody">${b}</div><div class="acts"><button type="button" class="btn g" data-a="x">Annuler</button><button type="button" class="btn" data-a="ok">Valider</button></div></div>`;$('#m').classList.add('o'); const first=$('#m input,#m select,#m textarea'); if(first) setTimeout(()=>first.focus(),30)}
+function fld(b){return String(b).replace(/<label>([\s\S]*?)(<(?:input|select|textarea)\b)/gi,(_,cap,tag)=>`<label><span>${cap.trim()}</span>${tag}`)}
+function modal(t,b,f,wide){okFn=f;$('#m').innerHTML=`<div class="mb${wide?' wide':''}"><h3>${t}</h3><div class="mbody">${fld(b)}</div><div class="acts"><button type="button" class="btn g" data-a="x">Annuler</button><button type="button" class="btn" data-a="ok">Valider</button></div></div>`;$('#m').classList.add('o'); const first=$('#m input,#m select,#m textarea'); if(first) setTimeout(()=>first.focus(),30)}
 function toast(s){const t=$('#t');t.textContent=s;t.classList.add('o');setTimeout(()=>t.classList.remove('o'),2400)}
 const partyName=x=>typeof x==='string'?x:(x&&x.n)||'';
 const cop=()=>opt(S.cl,c=>`<option>${esc(partyName(c))}</option>`);
