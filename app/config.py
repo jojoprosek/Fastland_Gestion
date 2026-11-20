@@ -3,8 +3,9 @@ from datetime import timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = ROOT / "data"
-DATA_DIR.mkdir(exist_ok=True)
+ON_VERCEL = bool(os.environ.get("VERCEL"))
+DATA_DIR = Path("/tmp/fastlane-data") if ON_VERCEL else ROOT / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def _secret_key() -> str:
@@ -24,4 +25,5 @@ class Config:
     JSON_SORT_KEYS = False
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SECURE = ON_VERCEL
     PERMANENT_SESSION_LIFETIME = timedelta(hours=12)
