@@ -1,11 +1,15 @@
 from flask import Flask
 
-from app.config import Config
+from app.config import ROOT, Config
 from app.database import db
 
 
 def create_app() -> Flask:
-    app = Flask(__name__, static_folder="../static", template_folder="../templates")
+    app = Flask(
+        __name__,
+        static_folder=str(ROOT / "static"),
+        template_folder=str(ROOT / "templates"),
+    )
     app.config.from_object(Config)
 
     db.init_app(app)
