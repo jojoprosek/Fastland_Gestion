@@ -1,5 +1,5 @@
 /* Fastlane Gestion — cache shell + état, file d’attente gérée par pwa.js */
-const VER = "fl8";
+const VER = "fl10";
 const SHELL = "fl-shell-" + VER;
 const DATA = "fl-data-" + VER;
 const CORE = [
